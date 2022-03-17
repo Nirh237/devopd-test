@@ -16,9 +16,9 @@ COPY --chown=my-app-user Gemfile.lock /srv/code
 
 # install application dependencies
 RUN bundle install -j64
-#RUN passenger-config compile-agent --auto --optimize && \
- # passenger-config install-standalone-runtime --auto --url-root=fake --connect-timeout=1 && \
- # passenger-config build-native-support
+RUN passenger-config compile-agent --auto --optimize && \
+  passenger-config install-standalone-runtime --auto --url-root=fake --connect-timeout=1 && \
+  passenger-config build-native-support
   
 RUN rm -rf /srv/code/public/assets && rake assets:precompile
 
