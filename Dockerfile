@@ -1,6 +1,6 @@
 
-FROM AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/base:v@BASE_NUMBER 
-
+#FROM AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/base:v@BASE_NUMBER 
+FROM nirh237/base:v1
 # install default version of bundler & install default version of passenger
 RUN gem install bundler --version 2.0.1 && \
   gem install passenger --version 6.0.2
@@ -10,6 +10,9 @@ RUN adduser -D my-app-user
 USER my-app-user
 
 WORKDIR /srv/code
+COPY --chown=my-app-user Gemfile /srv/code
+COPY --chown=my-app-user Gemfile.lock /srv/code
+
 
 # install application dependencies
 RUN bundle install -j64
