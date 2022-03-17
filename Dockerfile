@@ -1,5 +1,4 @@
 
-#!/bin/bash
 #FROM AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/base:v@BASE_NUMBER 
 FROM nirh237/base:v1
 # install default version of bundler & install default version of passenger
