@@ -3,7 +3,8 @@
 FROM nirh237/base:v1
 # install default version of bundler & install default version of passenger
 RUN gem install bundler --version 2.0.1 && \
-  gem install passenger --version 6.0.2
+  gem install passenger --version 6.0.2 && \
+  gem install rake
 
 # create a user for running the application
 RUN adduser -D my-app-user
