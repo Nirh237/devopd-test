@@ -23,7 +23,7 @@ jobs:
       with:
         # Not needed with a .ruby-version file
         ruby-version: 2.5.5
-        rubygems: gem update --system 3.2.3
+        rubygems: 3.2.3
         # runs 'bundle install' and caches installed gems automatically
         bundler-cache: true
 
