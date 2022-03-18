@@ -1,7 +1,7 @@
 
 #FROM AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/base:v@BASE_NUMBER 
 FROM nirh237/base:v1
-#RUN gem update --system
+RUN gem update --system
 
 # install default version of bundler & install default version of passenger
 RUN gem install bundler --version 2.0.1 && \
