@@ -17,9 +17,9 @@ COPY --chown=my-app-user Gemfile.lock ./
 
 # install application dependencies
 RUN bundle install -j64
-RUN passenger-config compile-agent --auto --optimize && \
-  passenger-config install-standalone-runtime --auto --url-root=fake --connect-timeout=1 && \
-  passenger-config build-native-support
+#RUN passenger-config compile-agent --auto --optimize && \
+#  passenger-config install-standalone-runtime --auto --url-root=fake --connect-timeout=1 && \
+#  passenger-config build-native-support
   
 #
 
@@ -29,8 +29,6 @@ COPY --chown=my-app-user . /srv/code
 
 EXPOSE 9393
 
-#WORKDIR /
-
 RUN rm -rf /srv/code/public/assets && rake assets:precompile
 
-ENTRYPOINT bundle exec passenger start --port 3000 --log-level 3 --min-instances 5 --max-pool-size 5 
+#ENTRYPOINT bundle exec passenger start --port 3000 --log-level 3 --min-instances 5 --max-pool-size 5 
