@@ -12,8 +12,8 @@ RUN adduser -D my-app-user
 USER my-app-user
 
 WORKDIR /srv/code
-COPY --chown=my-app-user Gemfile /srv/code
-COPY --chown=my-app-user Gemfile.lock /srv/code
+COPY --chown=my-app-user Gemfile ./
+COPY --chown=my-app-user Gemfile.lock ./
 
 # install application dependencies
 RUN bundle install -j64
@@ -31,7 +31,6 @@ EXPOSE 9393
 
 #WORKDIR /
 
-RUN rm -rf /srv/code/public/assets 
-#&& rake assets:precompile 
+RUN rm -rf /srv/code/public/assets && rake assets:precompile --tasks
 
 ENTRYPOINT bundle exec passenger start --port 3000 --log-level 3 --min-instances 5 --max-pool-size 5 
