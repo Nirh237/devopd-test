@@ -3,8 +3,7 @@
 FROM nirh237/base:v1
 # install default version of bundler & install default version of passenger
 RUN gem install bundler --version 2.0.1 && \
-  gem install passenger --version 6.0.2 && \
-  gem install rake
+  gem install passenger --version 6.0.2 
 
 # create a user for running the application
 RUN adduser -D my-app-user
@@ -29,6 +28,6 @@ COPY --chown=my-app-user . /srv/code
 
 EXPOSE 9393
 
-RUN rake assets:precompile
-RUN rm -rf /srv/code/public/assets 
+RUN rm -rf /srv/code/public/assets && rake assets:precompile
+
 ENTRYPOINT bundle exec passenger start --port 3000 --log-level 3 --min-instances 5 --max-pool-size 5 
