@@ -28,6 +28,6 @@ COPY --chown=my-app-user . /srv/code
 
 EXPOSE 9393
 
-RUN rm -rf /srv/code/public/assets 
 RUN rake assets:precompile
+RUN rm -rf /srv/code/public/assets 
 ENTRYPOINT bundle exec passenger start --port 3000 --log-level 3 --min-instances 5 --max-pool-size 5 
