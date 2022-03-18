@@ -18,11 +18,10 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
-    - name: Cache
-      uses: ruby/setup-ruby@v1
+    - uses: actions/cache@v1
       with:
-        bundler-cache: true
-
+        path: tmp
+        key: rubygems-v2-{{ hashFiles('Gemfile.lock') }}
     # run RSpec tests
     - run: bundle exec rspec
 
