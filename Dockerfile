@@ -1,7 +1,7 @@
 
 #FROM AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/base:v@BASE_NUMBER 
 FROM nirh237/base:v1
-RUN gem update --system
+#RUN gem update --system
 
 # install default version of bundler & install default version of passenger
 RUN gem install bundler --version 2.0.1 && \
@@ -17,11 +17,11 @@ COPY --chown=my-app-user Gemfile.lock ./
 
 # install application dependencies
 RUN bundle install -j64
-#RUN passenger-config compile-agent --auto --optimize && \
-#  passenger-config install-standalone-runtime --auto --url-root=fake --connect-timeout=1 && \
-#  passenger-config build-native-support
+RUN passenger-config compile-agent --auto --optimize && \
+  passenger-config install-standalone-runtime --auto --url-root=fake --connect-timeout=1 && \
+  passenger-config build-native-support
   
-#
+
 
 # source code
 COPY --chown=my-app-user . /srv/code
@@ -31,4 +31,4 @@ EXPOSE 9393
 
 RUN rm -rf /srv/code/public/assets && rake assets:precompile
 
-#ENTRYPOINT bundle exec passenger start --port 3000 --log-level 3 --min-instances 5 --max-pool-size 5 
+ENTRYPOINT bundle exec passenger start --port 3000 --log-level 3 --min-instances 5 --max-pool-size 5 
