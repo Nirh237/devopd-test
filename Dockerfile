@@ -23,7 +23,7 @@ RUN passenger-config compile-agent --auto --optimize && \
   
 
 
-# source code a
+# source code 
 COPY --chown=my-app-user . /srv/code
 
 
