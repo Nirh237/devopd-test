@@ -18,6 +18,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Cache
       uses: actions/cache@v2
       with:
         path: usr/local/bundle
