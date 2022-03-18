@@ -23,7 +23,7 @@ jobs:
         path: /usr/local/bundle/cache
         key: rubygems-v2-{{ hashFiles('Gemfile.lock') }}
     # run RSpec tests
-    #- run: bundle exec rspec
+    - run: bundle exec rspec
 
       
    
