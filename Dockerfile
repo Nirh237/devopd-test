@@ -1,6 +1,6 @@
 
 #FROM AWSACCOUNTID.dkr.ecr.us-east-1.amazonaws.com/base:v@BASE_NUMBER 
-FROM nirh237/base:v1
+FROM nirh237/base:v1 AS builder
 RUN gem update --system 
 
 # install default version of bundler & install default version of passenger
@@ -23,7 +23,10 @@ RUN passenger-config compile-agent --auto --optimize && \
   
 
 
+FROM builder
 # source code 
+
+COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
 COPY --chown=my-app-user . /srv/code
 
 
