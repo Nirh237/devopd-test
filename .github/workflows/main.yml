@@ -14,7 +14,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
     - name: Build the container image
-       run: docker build . --file Dockerfile --tag localbuild/testimage:latest
+      run: docker build . --file Dockerfile --tag localbuild/testimage:latest
       uses: anchore/scan-action@v3
       with:
         image: "localbuild/testimage:latest"
