@@ -1,0 +1,30 @@
+Setup Instruction for workink with Github Action and AWS ECR
+
+configure the GitHub Actions
+Step:1 Go to your GitHub repository and click on the ‘Actions’ menu.
+Step:2 Click on the set-up a workflow yourself 
+Step:3 Write the file name in the input box and then click on the ‘start commit’ and make a successful commit.
+Now, you’ve .github/workflow/your_file_name.yml inside your repository.
+
+in your_file_name.yml:
+Job-1: Create a Ubuntu remote environment/Runner where the workflow can run and build the Image.
+Job-2: Name: Check out code
+It simply checks out our GitHub repository for ‘Dockerfile’ to build the docker image.
+Job-3: Name: Configure AWS Credentials
+Setting up AWS CLI/SDK on Remote Host and Configuring AWS Login Credentials and Assuming Roles using the pre-written workflow by Official AWS Teams.
+Job-4: Name: Build, tag, and push the image to Amazon ECR
+Building the Docker Image by copying using the Code in our Repository (Dockerfile), Tagging the Image with a version, and Pushing it to an Elastic Container Registry (Private ECR). 
+
+Step:4 Create one AWS ECR repository
+- go to the AWS Management Console and search “ECR” in the search menu and click on the “Elastic Container Registry”. 
+- click on create a repository and choose private and then write your repository name into the given input field and create a repository.
+- go back to your your_file_name.yml file and edit the field ‘ECR_REPOSITORY’, and enter the name of your ECR_REPOSITORY.
+
+Step: 5 Add your AWS secrets to GitHub secrets
+- go to the setting menu of your repository and in that click on ‘secrets’
+- add AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY to your IAM user.
+(Your IAM user must have “AmazonEC2ContainerRegistryFullAccess” IAM permissions.)
+
+Step: 6 Monitoring, Building, and Pushing
+- Make a commitment to your repository.
+- Once the changes are pushed to the repository, check out the ‘Actions’ tab in your repository.
