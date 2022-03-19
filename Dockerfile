@@ -27,7 +27,7 @@ FROM base
 RUN adduser -D my-app-user
 USER my-app-user
 
-# source code
+# source code a
 WORKDIR /srv/code
 
 COPY --from=dependencies /usr/local/bundle/ /usr/local/bundle/
