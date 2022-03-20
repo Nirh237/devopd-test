@@ -16,11 +16,11 @@ jobs:
 
    - name: Build the Docker image
       run: docker build . --file Dockerfile --tag sysdiglabs/dummy-vuln-app:latest
-    - name: Scan image
-      uses: sysdiglabs/scan-action@v1
-      with:
-        image-tag: "sysdiglabs/dummy-vuln-app:latest"
-        sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN }}
+   - name: Scan image
+     uses: sysdiglabs/scan-action@v1
+     with:
+       image-tag: "sysdiglabs/dummy-vuln-app:latest"
+       sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN }}
       
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
