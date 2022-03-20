@@ -13,24 +13,26 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v2
-      
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 2.7.1
+        bundler: 2.0.1
+        bundler-cache: true
 
-    - name: Cache
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-gems-
+    #- name: Cache
+      #uses: actions/cache@v2
+      #with:
+        #path: vendor/bundle
+        #key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        #restore-keys: |
+         # ${{ runner.os }}-gems-
 
-    - name: Bundle Install
-      run: |  
-        bundle config path vendor/bundle
-        bundle install --jobs 4 --retry 3
+   # - name: Bundle Install
+    #  run: |  
+     #   bundle config path vendor/bundle
+      #  bundle install --jobs 4 --retry 3
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
