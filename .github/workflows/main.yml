@@ -49,5 +49,5 @@ jobs:
         ECR_REPOSITORY: base
         IMAGE_TAG: ${{github.run_number}}
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:v1 -f base.Dockerfile .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:v1
