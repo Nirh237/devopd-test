@@ -32,8 +32,8 @@ COPY --from=dependencies /usr/local/bundle/ /usr/local/bundle/
 
 COPY --chown=my-app-user . /srv/code
 
-RUN rm -rf /srv/code/public/assets && rake assets:precompile
-
 EXPOSE 9393
+
+RUN rm -rf /srv/code/public/assets && rake assets:precompile
 
 ENTRYPOINT bundle exec passenger start --port 3000 --log-level 3 --min-instances 5 --max-pool-size 5 
