@@ -14,19 +14,35 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
-    - name: Build the Container image
-      run: docker build . --file Dockerfile --tag localbuild/testimage:latest
-    - uses: anchore/scan-action@v3
-      id: scan
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
       with:
-        image: "localbuild/testimage:latest"
-        acs-report-enable: true
-        severity-cutoff: critical
+        image-ref: '286523409430.dkr.ecr.eu-west-3.amazonaws.com/app:${{github.run_number}}'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: eu-west-3
 
-    - name: upload Anchore scan SARIF report
+    - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v1
       with:
-        sarif_file: ${{ steps.scan.outputs.sarif }}
+        sarif_file: 'trivy-results.sarif'
+
+    #- name: Build the Container image
+      #run: docker build . --file Dockerfile --tag localbuild/testimage:latest
+    #- uses: anchore/scan-action@v3
+      #id: scan
+    #  with:
+      #  image: "localbuild/testimage:latest"
+      #  acs-report-enable: true
+       # severity-cutoff: critical
+
+    #- name: upload Anchore scan SARIF report
+     # uses: github/codeql-action/upload-sarif@v1
+     # with:
+       # sarif_file: ${{ steps.scan.outputs.sarif }}
 
    # - name: Build the Docker image
       #run: docker build . --file Dockerfile --tag sysdiglabs/dummy-vuln-app:latest
