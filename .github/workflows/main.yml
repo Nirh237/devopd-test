@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build an image from Dockerfile
-        run: |
+      run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
 
     - name: Run Trivy vulnerability scanner
