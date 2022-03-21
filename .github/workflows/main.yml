@@ -14,44 +14,39 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v2
 
+    - name: Build an image from Dockerfile
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
       with:
         image-ref: '286523409430.dkr.ecr.eu-west-3.amazonaws.com/app:99'
         format: 'sarif'
         output: 'trivy-results.sarif'
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_DEFAULT_REGION: eu-west-3
 
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v1
       with:
-        sarif_file: 'trivy-results.sarif'
+        sarif_file: 'trivy-results.sarif'  
 
-    #- name: Build the Container image
-      #run: docker build . --file Dockerfile --tag localbuild/testimage:latest
-    #- uses: anchore/scan-action@v3
-      #id: scan
-    #  with:
-      #  image: "localbuild/testimage:latest"
-      #  acs-report-enable: true
-       # severity-cutoff: critical
+    #- name: Run Trivy vulnerability scanner
+      #uses: aquasecurity/trivy-action@master
+     # with:
+      #  image-ref: '286523409430.dkr.ecr.eu-west-3.amazonaws.com/app:99'
+       # format: 'sarif'
+      #  output: 'trivy-results.sarif'
+     # env:
+      #  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+       # AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+       # AWS_DEFAULT_REGION: eu-west-3
 
-    #- name: upload Anchore scan SARIF report
+   # - name: Upload Trivy scan results to GitHub Security tab
      # uses: github/codeql-action/upload-sarif@v1
-     # with:
-       # sarif_file: ${{ steps.scan.outputs.sarif }}
+      #with:
+      #  sarif_file: 'trivy-results.sarif'
 
-   # - name: Build the Docker image
-      #run: docker build . --file Dockerfile --tag sysdiglabs/dummy-vuln-app:latest
-    #- name: Scan image
-     # uses: sysdiglabs/scan-action@v1
-     # with:
-      #  image-tag: "sysdiglabs/dummy-vuln-app:latest"
-      #  sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN }}
-      
+    
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
