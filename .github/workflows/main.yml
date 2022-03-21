@@ -16,7 +16,7 @@ jobs:
 
     - name: Build an image from Dockerfile
       run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t test:v1 .
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@master
