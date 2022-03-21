@@ -21,9 +21,9 @@ jobs:
         format: 'sarif'
         output: 'trivy-results.sarif'
       env:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: eu-west-3
+        AWS_ACCESS_KEY_ID: key_id
+        AWS_SECRET_ACCESS_KEY: access_key
+        AWS_DEFAULT_REGION: eu-west-3
 
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v1
