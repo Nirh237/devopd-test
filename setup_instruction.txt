@@ -1,4 +1,4 @@
-Setup Instruction for workink with Github Action and AWS ECR a
+Setup Instruction for workink with Github Action and AWS ECR 
 
 configure the GitHub Actions
 Step:1 Go to your GitHub repository and click on the ‘Actions’ menu.
