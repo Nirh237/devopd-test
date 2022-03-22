@@ -24,6 +24,18 @@ jobs:
         key: ${{ runner.os }}-buildx-${{ github.sha }}
         restore-keys: |
             ${{ runner.os }}-buildx-
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+          context: .
+          push: false
+          tags: 286523409430.dkr.ecr.eu-west-3.amazonaws.com/app:${{github.run_number}}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+    - name: Move cache
+      run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
     #- name: Run Trivy vulnerability scanner
       #uses: aquasecurity/trivy-action@master
