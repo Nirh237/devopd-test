@@ -1,3 +1,4 @@
+# Gemfile.lock allows  to specify the versions of the dependencies that application needs in the Gemfile
 GEM
   remote: https://rubygems.org/
   specs:
