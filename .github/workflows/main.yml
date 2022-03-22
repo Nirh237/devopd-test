@@ -63,7 +63,7 @@ jobs:
       with:
           context: .
           push: false
-          tags: $ECR_REGISTRY/$ECR_REPOSITORY:${{github.run_number}}
+          tags: '286523409430.dkr.ecr.eu-west-3.amazonaws.com/app:${{github.run_number}}'
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
     - name: Move cache
