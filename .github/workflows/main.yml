@@ -32,6 +32,9 @@ jobs:
       run: |  
         bundle config path vendor/bundle
         bundle install --jobs 4 --retry 3
+        curl \
+      -H "Accept: application/vnd.github.v3+json" \
+       echo https://api.github.com/repos/Nirh237/devops-test/actions/runs
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
