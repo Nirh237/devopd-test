@@ -21,7 +21,7 @@ RUN passenger-config compile-agent --auto --optimize && \
   
  
 FROM base
-# create a user for running the application 
+# create a user for running the application a 
 RUN adduser -D my-app-user
 USER my-app-user
 
