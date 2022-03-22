@@ -84,10 +84,10 @@ jobs:
       with:
         sarif_file: 'trivy-results.sarif' 
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: base
+        ECR_REPOSITORY: app
         IMAGE_TAG: ${{github.run_number}}
       run: |   
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
