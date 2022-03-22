@@ -31,7 +31,7 @@ COPY --from=dependencies /usr/local/bundle/ /usr/local/bundle/
 COPY --chown=my-app-user . /srv/code
 
 EXPOSE 9393
-# remove old assets & precompile assets before pushing code to production
+# cleaning the previous precompiled assets & precompile assets before pushing code to production
 RUN rm -rf /srv/code/public/assets && rake assets:precompile
 
 ENTRYPOINT bundle exec passenger start --port 3000 --log-level 3 --min-instances 5 --max-pool-size 5 
