@@ -1,6 +1,5 @@
 /.git
 /.github
 /README.md
-/.grype.yaml
 /.base.Dockerfile
 /setup_instruction.txt

@@ -1,7 +1,5 @@
 FROM 286523409430.dkr.ecr.eu-west-3.amazonaws.com/base:v1 AS base
 
-
-
 # install default version of bundler & install default version of passenger #gem update --system && \
 RUN gem install bundler --version 2.0.1 && \
   gem install passenger --version 6.0.2 
