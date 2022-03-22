@@ -24,10 +24,6 @@ jobs:
         key: ${{ runner.os }}-buildx-${{ github.sha }}
         restore-keys: |
             ${{ runner.os }}-buildx-
-    - name: Move cache
-      run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
     #- name: Run Trivy vulnerability scanner
       #uses: aquasecurity/trivy-action@master
