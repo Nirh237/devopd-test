@@ -1,6 +1,6 @@
 
-#FROM 286523409430.dkr.ecr.eu-west-3.amazonaws.com/base:v1 AS base
-FROM nirh237/base:v1 AS base
+FROM 286523409430.dkr.ecr.eu-west-3.amazonaws.com/base:v1 AS base
+#FROM nirh237/base:v1 AS base
 
 
 # install default version of bundler & install default version of passenger
