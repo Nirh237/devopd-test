@@ -55,11 +55,15 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-buildx-
     - name: Build and push
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: app
+        IMAGE_TAG: ${{github.run_number}}
       uses: docker/build-push-action@v2
       with:
           context: .
           push: false
-          tags: 286523409430.dkr.ecr.eu-west-3.amazonaws.com/app:${{github.run_number}}
+          tags: $ECR_REGISTRY/$ECR_REPOSITORY:${{github.run_number}}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
     - name: Move cache
